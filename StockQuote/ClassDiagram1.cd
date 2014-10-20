@@ -1,73 +1,92 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Comment CommentText="Loader called from ctor of Analyzer">
-    <Position X="3.937" Y="2.333" Height="0.458" Width="1.596" />
+    <Position X="4.187" Y="4.583" Height="0.458" Width="1.596" />
   </Comment>
   <Comment CommentText="Analyzer newed up, then FindReversals method iterated over">
     <Position X="2.417" Y="0.5" Height="0.75" Width="1.7" />
   </Comment>
   <Comment CommentText="Knows about characteristics of a StockQuote">
-    <Position X="8.229" Y="1.396" Height="0.75" Width="1.7" />
+    <Position X="10.25" Y="1.5" Height="0.75" Width="1.7" />
   </Comment>
   <Comment CommentText="Doing">
     <Position X="0.51" Y="0.5" Height="0.365" Width="0.742" />
   </Comment>
-  <Comment CommentText="Deciding - orchestrate Loading and FindReversals">
-    <Position X="1.802" Y="1.625" Height="0.552" Width="1.96" />
+  <Comment CommentText="Deciding - collaborate with other classes. Loading and FindReversals">
+    <Position X="2.052" Y="2.75" Height="0.729" Width="1.96" />
   </Comment>
   <Comment CommentText="Knows about characteristics of a Reversal">
-    <Position X="4.302" Y="3.688" Height="0.688" Width="1.44" />
+    <Position X="4.552" Y="5.938" Height="0.688" Width="1.44" />
   </Comment>
   <Comment CommentText="Doing - loads StockQuotes">
-    <Position X="5.812" Y="1.844" Height="0.344" Width="1.763" />
+    <Position X="8.062" Y="0.5" Height="0.344" Width="1.763" />
   </Comment>
   <Comment CommentText="Deciding - loops thorugh stocks and calls a method">
-    <Position X="0.5" Y="4.219" Height="1.146" Width="1.148" />
+    <Position X="0.75" Y="6.469" Height="1.146" Width="1.148" />
+  </Comment>
+  <Comment CommentText="What stocks meet this criteria?">
+    <Position X="0.76" Y="5.073" Height="0.437" Width="1.96" />
   </Comment>
   <Class Name="StockQuote.StockQuoteAnalyzer" Collapsed="true">
-    <Position X="1.75" Y="2.25" Width="2" />
+    <Position X="2" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgQAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAEAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StockQuote.ReversalLocator">
-    <Position X="1.75" Y="4.25" Width="2" />
+    <Position X="2" Y="6.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQAAAA=</HashCode>
-      <FileName>Program.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="StockQuote.StockQuoteLoader" Collapsed="true">
-    <Position X="5.75" Y="2.25" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StockQuote.Program" Collapsed="true">
     <Position X="0.5" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAg=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StockQuote.Reversal">
-    <Position X="4.25" Y="4.5" Width="1.5" />
+    <Position X="4.5" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="StockQuote.StockQuote" Collapsed="true">
-    <Position X="8.25" Y="2.25" Width="2" />
+  <Class Name="StockQuote.StockQuote">
+    <Position X="10.25" Y="2.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAAAggAAAAAAAAwAAAABAAAAAACAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="StockQuote.FileLoader" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="StockQuote.WebLoader" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="StockQuote.IDataLoader" Collapsed="true">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Enum Name="StockQuote.ReversalDirection">
-    <Position X="6.25" Y="4.5" Width="1.5" />
+    <Position X="6.5" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
       <FileName>Program.cs</FileName>

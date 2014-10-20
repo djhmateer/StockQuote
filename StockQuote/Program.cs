@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 
 namespace StockQuote {
     public class StockQuote {
@@ -12,11 +13,7 @@ namespace StockQuote {
         public decimal Low { get; set; }
         public decimal Close { get; set; }
 
-        // Little methods useful - increase readability of code
-        // responsibilities in right place
         public bool ReversesDownFrom(StockQuote otherQuote) {
-            // Is Opening price of this StockQuote greater than day High of other quote - ie gone up overnight
-            // and Closing price of this StockQuote less than day Low of other quote - ie crashed out during day (compare to yesterday)..BAD!
             return Open > otherQuote.High && Close < otherQuote.Low;
         }
 
@@ -25,30 +22,64 @@ namespace StockQuote {
         }
     }
 
-    // Responsible for loading from a file
-    public class StockQuoteLoader {
+    public interface IDataLoader {
+        string LoadData();
+    }
+
+    public class FileLoader : IDataLoader {
         private readonly string _fileName;
 
-        public StockQuoteLoader(string fileName) {
+        public FileLoader(string fileName) {
             _fileName = fileName;
         }
 
-        public IEnumerable<StockQuote> Load() {
-            return
-                from line in File.ReadAllLines(_fileName).Skip(1)
-                let data = line.Split(',')
-                select new StockQuote {
-                    //Date = DateTime.Parse(data[0]),
-                    Date = DateTime.ParseExact(data[0], "M/d/yyyy", CultureInfo.InvariantCulture),
-                    Open = decimal.Parse(data[1]),
-                    High = decimal.Parse(data[2]),
-                    Low = decimal.Parse(data[3]),
-                    Close = decimal.Parse(data[4])
-                };
+
+        public string LoadData() {
+            return File.ReadAllText(_fileName);
         }
     }
 
-    // Enum describing the direction
+    public class WebLoader : IDataLoader {
+        private readonly string _url;
+
+        public WebLoader(string url) {
+            _url = url;
+        }
+
+        public string LoadData() {
+            var client = new WebClient();
+            return client.DownloadString(new Uri(_url));
+        }
+    }
+
+    public interface IStockQuoteParser {
+        IList<StockQuote> LoadQuotes();
+    }
+
+    public class StockQuoteCsvParser : IStockQuoteParser {
+        private readonly IDataLoader _loader;
+
+        public StockQuoteCsvParser(IDataLoader loader) {
+            _loader = loader;
+        }
+
+        public IList<StockQuote> LoadQuotes() {
+            var csvData = _loader.LoadData().Split('\n');
+
+            return (
+               from line in csvData.Skip(1)
+               let data = line.Split(',')
+               select new StockQuote() {
+                   //Date = DateTime.Parse(data[0]),
+                   Date = DateTime.ParseExact(data[0], "M/d/yyyy", CultureInfo.InvariantCulture),
+                   Open = decimal.Parse(data[1]),
+                   High = decimal.Parse(data[2]),
+                   Low = decimal.Parse(data[3]),
+                   Close = decimal.Parse(data[4])
+               }).ToList();
+        }
+    }
+
     public enum ReversalDirection {
         Up,
         Down
@@ -63,9 +94,6 @@ namespace StockQuote {
         public StockQuote StockQuote { get; set; }
     }
 
-    // Dedicated to going through stocks, invoking ReversesDownFrom or UpFrom and
-    // passes onto something else
-    // only loops thorugh stocks and calls a method
     public class ReversalLocator {
         private readonly IList<StockQuote> _quotes;
 
@@ -85,36 +113,45 @@ namespace StockQuote {
         }
     }
 
-    // Collaborate with and orchestrate other objects to get a result
     class StockQuoteAnalyzer {
-        private readonly StockQuoteLoader _loader;
-        private List<StockQuote> _quotes;
+        private readonly IStockQuoteParser _parser;
 
-        public StockQuoteAnalyzer(string fileName) {
-            _loader = new StockQuoteLoader(fileName);
-            _quotes = _loader.Load().ToList();
+        public StockQuoteAnalyzer(IStockQuoteParser parser) {
+            _parser = parser;
         }
 
         public IEnumerable<Reversal> FindReversals() {
-            var locator = new ReversalLocator(_quotes);
+            var quotes = _parser.LoadQuotes();
+            var locator = new ReversalLocator(quotes);
             return locator.Locate();
         }
     }
 
     class Program {
         static void Main(string[] args) {
-            var analyzer = new StockQuoteAnalyzer("msft.csv");
+            var loader = GetLoaderFor("msft.csv");
+            var analyzer = new StockQuoteAnalyzer(loader);
+
             foreach (var reversal in analyzer.FindReversals()) {
                 PrintReversal(reversal);
             }
+        }
+
+        private static IStockQuoteParser GetLoaderFor(string source) {
+            IDataLoader loader;
+            if (source.ToLower().StartsWith("http")) {
+                loader = new WebLoader(source);
+            } else {
+                loader = new FileLoader(source);
+            }
+            return new StockQuoteCsvParser(loader);
         }
 
         private static void PrintReversal(Reversal reversal) {
             if (reversal.Direction == ReversalDirection.Up) {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Reversed up on " + reversal.StockQuote.Date);
-            }
-            else if (reversal.Direction == ReversalDirection.Down) {
+            } else if (reversal.Direction == ReversalDirection.Down) {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Reversed down on " + reversal.StockQuote.Date);
             }
