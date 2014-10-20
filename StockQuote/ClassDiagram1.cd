@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Loader called from ctor of Analyzer">
+    <Position X="3.937" Y="2.333" Height="0.458" Width="1.596" />
+  </Comment>
+  <Comment CommentText="Analyzer newed up, then FindReversals method iterated over">
+    <Position X="2.417" Y="0.5" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Knows about characteristics of a StockQuote">
+    <Position X="8.229" Y="1.396" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Doing">
+    <Position X="0.51" Y="0.5" Height="0.365" Width="0.742" />
+  </Comment>
+  <Comment CommentText="Deciding - orchestrate Loading and FindReversals">
+    <Position X="1.802" Y="1.625" Height="0.552" Width="1.96" />
+  </Comment>
+  <Comment CommentText="Knows about characteristics of a Reversal">
+    <Position X="4.302" Y="3.688" Height="0.688" Width="1.44" />
+  </Comment>
+  <Comment CommentText="Doing - loads StockQuotes">
+    <Position X="5.812" Y="1.844" Height="0.344" Width="1.763" />
+  </Comment>
+  <Comment CommentText="Deciding - loops thorugh stocks and calls a method">
+    <Position X="0.5" Y="4.219" Height="1.146" Width="1.148" />
+  </Comment>
+  <Class Name="StockQuote.StockQuoteAnalyzer" Collapsed="true">
+    <Position X="1.75" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgQAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StockQuote.ReversalLocator">
+    <Position X="1.75" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StockQuote.StockQuoteLoader" Collapsed="true">
+    <Position X="5.75" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StockQuote.Program" Collapsed="true">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StockQuote.Reversal">
+    <Position X="4.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StockQuote.StockQuote" Collapsed="true">
+    <Position X="8.25" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAggAAAAAAAAwAAAABAAAAAACAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="StockQuote.ReversalDirection">
+    <Position X="6.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
