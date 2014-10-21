@@ -64,19 +64,33 @@ namespace StockQuote {
         }
 
         public IList<StockQuote> LoadQuotes() {
-            var csvData = _loader.LoadData().Split('\n');
+            string[] csvData = _loader.LoadData().Split('\n');
 
-            return (
-               from line in csvData.Skip(1)
-               let data = line.Split(',')
-               select new StockQuote() {
-                   //Date = DateTime.Parse(data[0]),
-                   Date = DateTime.ParseExact(data[0], "M/d/yyyy", CultureInfo.InvariantCulture),
-                   Open = decimal.Parse(data[1]),
-                   High = decimal.Parse(data[2]),
-                   Low = decimal.Parse(data[3]),
-                   Close = decimal.Parse(data[4])
-               }).ToList();
+            var list = new List<StockQuote>();
+            foreach (var s in csvData.Skip(1)) {
+                var data = s.Split(',');
+                var st = new StockQuote {
+                    Date = DateTime.ParseExact(data[0], "M/d/yyyy", CultureInfo.InvariantCulture),
+                    Open = decimal.Parse(data[1]),
+                    High = decimal.Parse(data[2]),
+                    Low = decimal.Parse(data[3]),
+                    Close = decimal.Parse(data[4])
+                };
+                list.Add(st);
+            }
+            return list;
+
+            //return (
+            //   from line in csvData.Skip(1)
+            //   let data = line.Split(',')
+            //   select new StockQuote() {
+            //       //Date = DateTime.Parse(data[0]),
+            //       Date = DateTime.ParseExact(data[0], "M/d/yyyy", CultureInfo.InvariantCulture),
+            //       Open = decimal.Parse(data[1]),
+            //       High = decimal.Parse(data[2]),
+            //       Low = decimal.Parse(data[3]),
+            //       Close = decimal.Parse(data[4])
+            //   }).ToList();
         }
     }
 
@@ -141,7 +155,8 @@ namespace StockQuote {
             IDataLoader loader;
             if (source.ToLower().StartsWith("http")) {
                 loader = new WebLoader(source);
-            } else {
+            }
+            else {
                 loader = new FileLoader(source);
             }
             return new StockQuoteCsvParser(loader);
@@ -151,7 +166,8 @@ namespace StockQuote {
             if (reversal.Direction == ReversalDirection.Up) {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Reversed up on " + reversal.StockQuote.Date);
-            } else if (reversal.Direction == ReversalDirection.Down) {
+            }
+            else if (reversal.Direction == ReversalDirection.Down) {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Reversed down on " + reversal.StockQuote.Date);
             }

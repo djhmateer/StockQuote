@@ -1,8 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Comment CommentText="Loader called from ctor of Analyzer">
-    <Position X="4.187" Y="4.583" Height="0.458" Width="1.596" />
-  </Comment>
   <Comment CommentText="Analyzer newed up, then FindReversals method iterated over">
     <Position X="2.417" Y="0.5" Height="0.75" Width="1.7" />
   </Comment>
@@ -13,7 +10,7 @@
     <Position X="0.51" Y="0.5" Height="0.365" Width="0.742" />
   </Comment>
   <Comment CommentText="Deciding - collaborate with other classes. Loading and FindReversals">
-    <Position X="2.052" Y="2.75" Height="0.729" Width="1.96" />
+    <Position X="2.5" Y="2.25" Height="0.729" Width="1.96" />
   </Comment>
   <Comment CommentText="Knows about characteristics of a Reversal">
     <Position X="4.552" Y="5.938" Height="0.688" Width="1.44" />
@@ -25,10 +22,10 @@
     <Position X="0.75" Y="6.469" Height="1.146" Width="1.148" />
   </Comment>
   <Comment CommentText="What stocks meet this criteria?">
-    <Position X="0.76" Y="5.073" Height="0.437" Width="1.96" />
+    <Position X="1.271" Y="5.094" Height="0.437" Width="1.96" />
   </Comment>
-  <Class Name="StockQuote.StockQuoteAnalyzer" Collapsed="true">
-    <Position X="2" Y="4.5" Width="2" />
+  <Class Name="StockQuote.StockQuoteAnalyzer">
+    <Position X="2.5" Y="3.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAEAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
@@ -41,7 +38,7 @@
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="StockQuote.Program" Collapsed="true">
+  <Class Name="StockQuote.Program">
     <Position X="0.5" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAg=</HashCode>
@@ -62,7 +59,7 @@
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="StockQuote.FileLoader" Collapsed="true">
+  <Class Name="StockQuote.FileLoader">
     <Position X="7.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAQAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
